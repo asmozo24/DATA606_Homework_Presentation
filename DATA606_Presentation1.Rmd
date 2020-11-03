@@ -1,62 +1,40 @@
 ---
 title: "Introduction to linear regression"
 author: "Alexis Mekueko"
-date: "10/24/2020"
+date: "11/4/2020"
 output:
-  ioslides_presentation: default
+  slidy_presentation: default
   pdf_document: default
   html_document:
     df_print: paged
   beamer_presentation: default
-  slidy_presentation: default
-header-includes:
-- \usepackage{tikz}
-- \usetikzlibrary{positioning,shapes.multipart,shapes}
+  ioslides_presentation: default
+
 ---
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 Github link:    https://github.com/asmozo24/DATA606_Homework_Presentation
 
 Web linl:       https://rpubs.com/amekueko/684788
 
 
+<!-- ```{r setup, include=FALSE} -->
+<!-- knitr::opts_chunk$set(echo = FALSE) -->
+<!-- ``` -->
+
 ## R Packages
 
-```{r load-packages, message=FALSE}
+```{r load-packages, results='hide',warning=FALSE, message=FALSE}
 #loading all library needed for this assignment
 library(tidyverse) 
-library(openintro)
-library(data.table)
-library(knitr)
-library(stringr)
-library(plyr)
-library(pdftools)
-library(plotrix)
-library(gplots)
-library(tibble)
-library(statsr)
-library(utils)
-#library("EBImage")
 library(magick)
-#(DATA606)
 
 ```
-
-
-Github Link: https://github.com/asmozo24/DATA606_Chapter8_Homework8
-
-Web link: https://rpubs.com/amekueko/684788
-
-
-linear regression is one of the statistical techniques used to determine whether or not an observation has a linear relationship with the observed response. This technique consists of : fitting a line, residuals, and correlation and Least squares regression. Let's use linear regression to the following problem. 
+# Summary
+Linear regression is one of the statistical techniques used to determine whether or not an observation has a linear relationship with the observed response. This technique consists of : fitting a line, residuals, and correlation and Least squares regression. Let's use linear regression to the following problem. 
 
 # Problem Statement
 
-```{r}
+```{r, echo=FALSE}
 #reading a jpg image from github repo
 image1 <- image_read('https://raw.githubusercontent.com/asmozo24/DATA606_Homework_Presentation/main/problem.JPG')
 #displaying the image
@@ -65,50 +43,33 @@ image1
 
 ```
 
-
 # Answers:
 
-#### a) Describe the relationship between number of tourists and spending.
-
-#### Answer: As the number of tourists was increasing, their spending in Turkish was going up too. So, there is likely a linear relationship between the number of tourists and their spending by year. y = ax + b
+#### (a) Describe the relationship between number of tourists and spending.
+Answer:  
+As the number of tourists was increasing, their spending in Turkish was going up too. So, there is likely a linear relationship between the number of tourists and their spending by year. y = ax + b
 
 #### (b) What are the explanatory and response variables?
-#### Answer: The response variables = tourist spending by year, explanatory  = Number of tourists by year
+Answer:  
+The response variables = tourist spending by year, explanatory  = Number of tourists by year
 
 #### (c) Why might we want to fit a regression line to these data?
-#### Answer: this linear relationship between the number of tourists and their spending carries some error and we might want to fit a regression line to measure the corelation between the two variables. In order words, we want to predict the values of the dependent/response variable (number of tourists) using the values from explanatory/independant variable. Can the number of tourists being a predictor for spending?
+Answer:  
+This linear relationship between the number of tourists and their spending carries some error and we might want to fit a regression line to measure the corelation between the two variables. In order words, we want to predict the values of the dependent/response variable (number of tourists) using the values from explanatory/independant variable. Can the number of tourists being a predictor for spending?
 
-#### (d) Do the data meet the conditions required for fitting a least squares line? In addition to the scatterplot, use the residual plot and histogram to answer this question.
+#### (d) Do the data meet the conditions required for fitting a least squares line? In addition to the scatterplot, use the residual plot and histogram to answer this question.  
+Answer: yes.
 
+##### Linearity:
+Based on the number of tourists/spending scatterplot , the data shows no there outliers and we observe a linear (positive/uphill) trend line and the residual plot  shows a no particular pattern. 
 
-#### Linearity: Based on the number of tourists/spending scatterplot , the data shows no there outliers and we observe a linear (positive/uphill) trend line and the residual plot  shows a no particular pattern. 
+##### Nearly normal residuals:  
+Based on the histogram plot, the data shows a normal distribution unimodal bell-shaped. 
 
-#### Nearly normal residuals:  based on the histogram plot, the data shows a normal distribution unimodal bell-shaped. 
+##### Constant variability: 
+Based on the residuals plot, the variability of the number of tourists appears to be around the line residuals = 0.
 
-#### Constant variability: Based on the residuals plot, the variability of the number of tourists appears to be around the line residuals = 0
-
-#### Independent observations: Based on the problem statement, the sample is likely independent since the data collected from the number of tourists does not influence the spending. The problem did not let's think otherwise. 
-
-
-
-\tikzset{basic/.style={
-        draw,
-        rectangle split,
-        rectangle split parts=2,
-        rectangle split part fill={blue!20,white},
-        minimum width=2.5cm,
-        text width=2cm,
-        align=left,
-        font=\itshape
-    },
-    Diamond/.style={ diamond, 
-                        draw, 
-                        shape aspect=2, 
-                        inner sep = 2pt,
-                        text centered,
-                        fill=blue!10!white,
-                        font=\itshape
-                      }
-        }
+##### Independent observations: 
+Based on the problem statement, the sample is likely independent since the data collected from the number of tourists does not influence the spending. The problem did not let's think otherwise. 
 
 
